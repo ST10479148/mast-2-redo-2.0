@@ -10,11 +10,7 @@ import {
   ScrollView,
   Image,
   Animated,
-  BackHandler,
 } from "react-native";
-
-// Import logo
-import logo from "./assets/logo.jpeg";
 
 interface MenuItem {
   id: number;
@@ -93,16 +89,12 @@ export default function App() {
     return orders.reduce((sum, i) => sum + i.price, 0).toFixed(2);
   };
 
-  const exitApp = () => {
-    BackHandler.exitApp();
-  };
-
   // ---------- Screens ----------
   if (screen === "Welcome") {
     return (
       <View style={styles.container}>
         <View style={styles.logoPlaceholder}>
-          <Image source={logo} style={styles.logoImage} resizeMode="contain" />
+          <Text style={{ color: "#ccc" }}>[ App Logo Here ]</Text>
         </View>
         <Text style={styles.header}>Welcome to Chef's Menu App</Text>
         <Text style={styles.textCenter}>
@@ -117,9 +109,6 @@ export default function App() {
         <TouchableOpacity style={styles.navButtonSecondary} onPress={() => setScreen("PlaceOrder")}>
           <Text style={styles.navText}>View Order ({orders.length})</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navButtonSecondary} onPress={exitApp}>
-          <Text style={styles.navText}>Exit App</Text>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -127,9 +116,6 @@ export default function App() {
   if (screen === "Today") {
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.logoPlaceholder}>
-          <Image source={logo} style={styles.logoImage} resizeMode="contain" />
-        </View>
         <Text style={styles.header}>Today's Menu</Text>
         {courses.map((c) => {
           const items = menu.filter((m) => m.course === c);
@@ -170,9 +156,6 @@ export default function App() {
   if (screen === "Explore") {
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.logoPlaceholder}>
-          <Image source={logo} style={styles.logoImage} resizeMode="contain" />
-        </View>
         <Text style={styles.header}>Explore More</Text>
         <TextInput
           style={styles.input}
@@ -225,9 +208,6 @@ export default function App() {
     const quantity = orderQuantity[selectedDish.id] || 1;
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.logoPlaceholder}>
-          <Image source={logo} style={styles.logoImage} resizeMode="contain" />
-        </View>
         <Image source={{ uri: selectedDish.image }} style={styles.detailImage} />
         <Text style={styles.header}>{selectedDish.name}</Text>
         <Text style={styles.cardDesc}>{selectedDish.description}</Text>
@@ -263,9 +243,6 @@ export default function App() {
   if (screen === "PlaceOrder") {
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.logoPlaceholder}>
-          <Image source={logo} style={styles.logoImage} resizeMode="contain" />
-        </View>
         <Text style={styles.header}>Your Order</Text>
         {orders.length === 0 ? (
           <Text style={styles.textCenter}>No items in order yet.</Text>
@@ -300,9 +277,6 @@ export default function App() {
   if (screen === "Change") {
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.logoPlaceholder}>
-          <Image source={logo} style={styles.logoImage} resizeMode="contain" />
-        </View>
         <Text style={styles.header}>Change Menu (Chef Only)</Text>
         <TextInput
           style={styles.input}
@@ -357,10 +331,10 @@ export default function App() {
   if (screen === "About") {
     return (
       <View style={styles.container}>
-        <View style={styles.logoPlaceholder}>
-          <Image source={logo} style={styles.logoImage} resizeMode="contain" />
-        </View>
         <Text style={styles.header}>About the Chef</Text>
+        <View style={styles.logoPlaceholder}>
+          <Text style={{ color: "#ccc" }}>[ Chef Image Here ]</Text>
+        </View>
         <Text style={styles.textCenter}>
           Welcome to Chef Amahle’s kitchen — where taste meets creativity!
           Every dish is made with passion and the finest ingredients.
@@ -383,17 +357,9 @@ const styles = StyleSheet.create({
   textCenter: { textAlign: "center", marginVertical: 10, color: "#fff" },
   input: { borderWidth: 1, borderColor: "#555", borderRadius: 8, padding: 10, marginVertical: 5, color: "#fff" },
   logoPlaceholder: {
-    height: 120,
-    width: "100%",
-    borderWidth: 2,
-    borderColor: "#555",
-    borderStyle: "dashed",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 12,
-    marginVertical: 20,
+    height: 120, width: "100%", borderWidth: 2, borderColor: "#555", borderStyle: "dashed",
+    alignItems: "center", justifyContent: "center", borderRadius: 12, marginVertical: 20
   },
-  logoImage: { width: 120, height: 120, borderRadius: 12 },
   typeContainer: { flexDirection: "row", justifyContent: "space-around", marginVertical: 10 },
   typeButton: { padding: 8, borderRadius: 8, borderWidth: 1, borderColor: "#555" },
   selectedType: { backgroundColor: "#FFD700" },
